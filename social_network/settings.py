@@ -1,6 +1,8 @@
 import os
 
 from configurations import Configuration, values
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 
 class BaseConfiguration(Configuration):
@@ -93,3 +95,14 @@ class Prod(BaseConfiguration):
     DEBUG = False
 
     ALLOWED_HOSTS = values.ListValue(environ_required=True)
+
+    SENTRY_DSN = values.Value(environ_prefix=None, environ_required=True)
+
+    @classmethod
+    def post_setup(cls):
+        super(Prod, cls).post_setup()
+
+        sentry_sdk.init(
+            dsn=cls.SENTRY_DSN,
+            integrations=[DjangoIntegration()],
+        )
