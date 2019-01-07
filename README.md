@@ -1,6 +1,6 @@
 # Transcendence project
 
-[TODO. There will be project description]
+This project is a simplified version of a social network developed using the [Django](https://www.djangoproject.com/) web framework.
 
 # Project Goals
 
