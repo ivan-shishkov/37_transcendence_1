@@ -2,9 +2,12 @@
 import os
 import sys
 
+import dotenv
+
 if __name__ == '__main__':
+    dotenv.read_dotenv()
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'social_network.settings')
-    os.environ.setdefault('DJANGO_CONFIGURATION', 'Dev')
 
     from configurations.management import execute_from_command_line
 
