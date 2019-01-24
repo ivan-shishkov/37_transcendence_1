@@ -38,10 +38,11 @@ def download_project_source_code():
 
 
 def create_project_database():
-    require.postgres.user(
-        name=env.PROJECT_DATABASE_USER,
-        password=env.PROJECT_DATABASE_PASSWORD,
-    )
+    with hide('running'):
+        require.postgres.user(
+            name=env.PROJECT_DATABASE_USER,
+            password=env.PROJECT_DATABASE_PASSWORD,
+        )
     require.postgres.database(
         name=env.PROJECT_DATABASE_NAME,
         owner=env.PROJECT_DATABASE_USER,
