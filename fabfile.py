@@ -1,7 +1,7 @@
 import os
 
-from fabric.api import env, run, cd, sudo, task, hide
-from fabtools import require, files, supervisor, python
+from fabric.api import env, run, cd, task, hide
+from fabtools import require, files, supervisor, python, service
 
 from fabric_set_env import set_env
 
@@ -171,7 +171,7 @@ def update_nginx_configuration(config_path='/etc/nginx/sites-enabled/'):
             destination=project_config_filepath,
             use_sudo=True,
         )
-    sudo('service nginx reload')
+    service.reload('nginx')
 
 
 @task
