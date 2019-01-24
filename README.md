@@ -1,6 +1,7 @@
 # Transcendence project
 
 This project is a simplified version of a social network developed using the [Django](https://www.djangoproject.com/) web framework.
+An online version of the latest version of the project is available [here](http://83.220.170.27/).
 
 # Used Environment Variables
 
