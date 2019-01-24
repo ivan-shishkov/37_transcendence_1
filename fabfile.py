@@ -142,7 +142,7 @@ def update_supervisor_configuration(
             destination=destination_filepath,
             use_sudo=True,
         )
-    supervisor.update_config()
+    supervisor.reload_config()
 
 
 def upload_project_nginx_config():
