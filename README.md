@@ -58,6 +58,45 @@ After that you can log in to admin interface on [http://localhost:8000/admin/](h
 
 All created users will have personal pages available on **http://localhost:8000/users/<user_id>/** (e.g. http://localhost:8000/users/1/).
 
+# Deploy on Production Server
+
+To deploy the project, you must use the server with **Ubuntu 16.04 LTS** installed.
+In addition, a user must be created on the server who has the right to execute the **sudo** command.
+
+For project deploy need to install Python 3.5 and then install dependencies:
+
+```bash
+
+$ pip install -r requirements-deploy.txt
+
+```
+
+then open the **deploy_params.txt** file and set the necessary parameters for the deployment:
+
+* **REMOTE_HOST** - a remote server (e.g. 123.123.123.123)
+* **REMOTE_HOST_USERNAME** - a username on the remote server
+* **REMOTE_HOST_PASSWORD** - a user password on the remote server
+* **REMOTE_HOST_SSH_PORT** - a port number for SSH connection (e.g. 22)
+* **PROJECT_DATABASE_USER** - a database username
+* **PROJECT_DATABASE_PASSWORD** - a database user password
+* **PROJECT_DATABASE_NAME** - a project database name
+* **DJANGO_SECRET_KEY** - a Django secret key (see above)
+* **DJANGO_SUPERUSER_USERNAME** - a superuser name for the Django admin interface
+* **DJANGO_SUPERUSER_EMAIL** - a superuser e-mail for the Django admin interface
+* **DJANGO_SUPERUSER_PASSWORD** - a superuser password for the Django admin interface
+* **SENTRY_DSN** - a Sentry DSN (see above)
+
+and then execute the deploy of project on the remote server:
+
+```bash
+
+$ source deploy_params.txt
+$ fab bootstrap
+
+```
+
+After completion of the deployment process, the project will be available via a web browser.
+
 # Project Goals
 
 The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
