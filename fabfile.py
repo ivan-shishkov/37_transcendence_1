@@ -93,7 +93,7 @@ User = get_user_model()
     
 if User.objects.filter(username='{username}').count() == 0:
     User.objects.create_superuser(username='{username}', 
-        email='{email}', password='{password}').save()
+        email='{email}', password='{password}')
 """
     create_superuser_command = 'python manage.py shell -c "{}"'.format(
         create_superuser_code_template.format(
