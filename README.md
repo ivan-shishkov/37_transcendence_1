@@ -71,8 +71,7 @@ For project deploy need to install Python 3.5 and then install dependencies:
 $ pip install -r requirements-deploy.txt
 
 ```
-
-then open the **deploy_params.txt** file and set the necessary parameters for the deployment:
+then create the file with deployment parameters (e.g. **deploy_params.txt**) and set the necessary parameters:
 
 * **REMOTE_HOST** - a remote server (e.g. 123.123.123.123)
 * **REMOTE_HOST_USERNAME** - a username on the remote server
@@ -87,7 +86,26 @@ then open the **deploy_params.txt** file and set the necessary parameters for th
 * **DJANGO_SUPERUSER_PASSWORD** - a superuser password for the Django admin interface
 * **SENTRY_DSN** - a Sentry DSN (see above)
 
-and then execute the deploy of project on the remote server:
+All parameters should be in form **export PARAMETER='your_parameter_value'**, e.g.:
+
+```bash
+
+export REMOTE_HOST='your_remote_host'
+export REMOTE_HOST_USERNAME='your_remote_host_username'
+export REMOTE_HOST_PASSWORD='your_remote_host_password'
+export REMOTE_HOST_SSH_PORT='22'
+export PROJECT_DATABASE_USER='your_project_database_user'
+export PROJECT_DATABASE_PASSWORD='your_project_database_password'
+export PROJECT_DATABASE_NAME='your_project_database_name'
+export DJANGO_SECRET_KEY='your_django_secret_key'
+export DJANGO_SUPERUSER_USERNAME='your_superuser_username'
+export DJANGO_SUPERUSER_EMAIL='your_superuser_email'
+export DJANGO_SUPERUSER_PASSWORD='your_superuser_password'
+export SENTRY_DSN='your_sentry_dsn'
+
+```
+
+Then execute the deployment of project on the remote server:
 
 ```bash
 
