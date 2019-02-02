@@ -5,7 +5,7 @@ An online version of the latest version of the project is available [here](http:
 
 # Used Environment Variables
 
-* **DJANGO_CONFIGURATION** - a configuration to run the project (maybe either **Dev** (development) or **Prod** (production))
+* **DJANGO_CONFIGURATION** - a configuration to run the project (can be either **Dev** (development) or **Prod** (production))
 * **DJANGO_SECRET_KEY** - a [secret key](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-SECRET_KEY)
 * **DJANGO_DATABASE_URI** - a database URI (The database must be either **SQLite** or **PostgreSQL**)
 * **DJANGO_ALLOWED_HOSTS** - a [list of strings](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-ALLOWED_HOSTS) representing the host/domain names that this Django site can serve (**only for production**)
