@@ -1,7 +1,7 @@
 import os
 
 from fabric.api import env, run, cd, task, hide
-from fabtools import require, files, supervisor, python, service
+from fabtools import require, files, python, service, systemd
 
 from fabric_set_env import set_env
 
@@ -12,8 +12,7 @@ env.hosts = [env.REMOTE_HOST]
 def install_ubuntu_packages():
     require.deb.packages(
         pkg_list=[
-            'git', 'python3-pip', 'nginx', 'supervisor',
-            'postgresql', 'postgresql-contrib',
+            'git', 'python3-pip', 'nginx', 'postgresql', 'postgresql-contrib',
         ],
         update=True,
     )
@@ -122,27 +121,21 @@ def upload_project_uwsgi_config():
     )
 
 
-def upload_project_supervisor_config():
+def upload_uwsgi_service_config(config_filename='uwsgi.service'):
     require.files.template_file(
-        path=env.SUPERVISOR_CONFIG_FILEPATH,
-        template_source=env.SUPERVISOR_TEMPLATE_SOURCE,
+        path=os.path.join('/etc/systemd/system', config_filename),
+        template_source=os.path.join('config_templates', config_filename),
         context={
-            'user': env.user,
-            'project_dir': env.PROJECT_DIR,
             'project_uwsgi_config_filepath': env.UWSGI_CONFIG_FILEPATH,
         },
+        use_sudo=True,
+        mode=644,
     )
 
 
-def update_supervisor_configuration(
-        destination_filepath='/etc/supervisor/conf.d/social-network.conf'):
-    if not files.is_link(destination_filepath):
-        files.symlink(
-            source=env.SUPERVISOR_CONFIG_FILEPATH,
-            destination=destination_filepath,
-            use_sudo=True,
-        )
-    supervisor.reload_config()
+def update_uwsgi_service(service_name='uwsgi'):
+    systemd.restart(service_name)
+    systemd.enable(service_name)
 
 
 def upload_project_nginx_config():
@@ -194,7 +187,9 @@ def bootstrap():
     create_project_configs_directory()
 
     upload_project_uwsgi_config()
-    upload_project_supervisor_config()
-    update_supervisor_configuration()
+
+    upload_uwsgi_service_config()
+    update_uwsgi_service()
+
     upload_project_nginx_config()
     update_nginx_configuration()

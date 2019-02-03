@@ -51,9 +51,3 @@ def set_env(env):
         env.PROJECT_CONFIGS_DIR, env.UWSGI_CONFIG_FILENAME)
     env.UWSGI_TEMPLATE_SOURCE = os.path.join(
         env.CONFIG_TEMPLATES_DIR, env.UWSGI_CONFIG_FILENAME)
-
-    env.SUPERVISOR_CONFIG_FILENAME = 'social_network_supervisor.conf'
-    env.SUPERVISOR_CONFIG_FILEPATH = os.path.join(
-        env.PROJECT_CONFIGS_DIR, env.SUPERVISOR_CONFIG_FILENAME)
-    env.SUPERVISOR_TEMPLATE_SOURCE = os.path.join(
-        env.CONFIG_TEMPLATES_DIR, env.SUPERVISOR_CONFIG_FILENAME)
