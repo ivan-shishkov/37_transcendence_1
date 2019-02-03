@@ -33,7 +33,9 @@ def install_uwsgi(destination_filepath='/usr/bin/uwsgi', package_name='uwsgi',
 
 def download_project_source_code():
     with cd(env.USER_HOME_DIR):
-        require.git.working_copy(remote_url=env.REPO_URL)
+        require.git.working_copy(
+            'https://github.com/ivan-shishkov/37_transcendence_1.git',
+        )
 
 
 def create_project_database():
@@ -49,10 +51,10 @@ def create_project_database():
     )
 
 
-def upload_project_env_variables():
+def upload_project_env_variables(config_filename='.env'):
     require.files.template_file(
-        path=env.ENV_CONFIG_FILEPATH,
-        template_source=env.ENV_TEMPLATE_SOURCE,
+        path=os.path.join(env.PROJECT_DIR, config_filename),
+        template_source=os.path.join('config_templates', config_filename),
         context={
             'secret_key': env.DJANGO_SECRET_KEY,
             'db_user': env.PROJECT_DATABASE_USER,
@@ -112,7 +114,8 @@ def create_project_configs_directory():
 def upload_project_uwsgi_config():
     require.files.template_file(
         path=env.UWSGI_CONFIG_FILEPATH,
-        template_source=env.UWSGI_TEMPLATE_SOURCE,
+        template_source=os.path.join(
+            'config_templates', env.UWSGI_CONFIG_FILENAME),
         context={
             'socket_filepath': env.SOCKET_FILEPATH,
             'project_dir': env.PROJECT_DIR,
@@ -141,11 +144,12 @@ def update_uwsgi_service(service_name='uwsgi'):
 def upload_project_nginx_config():
     require.files.template_file(
         path=env.NGINX_CONFIG_FILEPATH,
-        template_source=env.NGINX_TEMPLATE_SOURCE,
+        template_source=os.path.join(
+            'config_templates', env.NGINX_CONFIG_FILENAME),
         context={
             'socket_filepath': env.SOCKET_FILEPATH,
             'server_name': env.REMOTE_HOST,
-            'project_static_dir': env.PROJECT_STATIC_DIR,
+            'project_static_dir': os.path.join(env.PROJECT_DIR, 'static'),
         },
     )
 
