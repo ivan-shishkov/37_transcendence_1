@@ -1,6 +1,6 @@
 import os
 
-from fabric.api import env, run, cd, task, hide
+from fabric.api import env, run, cd, task, hide, settings
 from fabtools import require, files, python, service, systemd
 
 from fabric_set_env import set_env
@@ -87,24 +87,18 @@ def run_project_management_commands():
 
 
 def create_django_admin_superuser():
-    create_superuser_code_template = """
-from django.contrib.auth import get_user_model
-    
-User = get_user_model()
-    
-if User.objects.filter(username='{username}').count() == 0:
-    User.objects.create_superuser(username='{username}', 
-        email='{email}', password='{password}')
-"""
-    create_superuser_command = 'python manage.py shell -c "{}"'.format(
-        create_superuser_code_template.format(
-            username=env.DJANGO_SUPERUSER_USERNAME,
-            email=env.DJANGO_SUPERUSER_EMAIL,
-            password=env.DJANGO_SUPERUSER_PASSWORD,
-        ),
-    )
-    with hide('running'):
-        run(create_superuser_command)
+    prompts = {
+        'Password: ': env.DJANGO_SUPERUSER_PASSWORD,
+        'Password (again): ': env.DJANGO_SUPERUSER_PASSWORD,
+    }
+    with settings(hide('stdout'), prompts=prompts, warn_only=True):
+        run(
+            'python manage.py createsuperuser '
+            '--username={username} --email={email}'.format(
+                username=env.DJANGO_SUPERUSER_USERNAME,
+                email=env.DJANGO_SUPERUSER_EMAIL,
+            ),
+        )
 
 
 def create_project_configs_directory():
