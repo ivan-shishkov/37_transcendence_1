@@ -116,6 +116,14 @@ $ fab bootstrap
 
 After completion of the deployment process, the project will be available via a web browser.
 
+If you only need to update the source code of the project, then you can use the light version of the deployment command:
+
+```bash
+
+$ fab deploy
+
+```
+
 # Project Goals
 
 The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
