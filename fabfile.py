@@ -73,17 +73,15 @@ def create_project_virtualenv():
 
 
 def install_project_requirements():
-    with python.virtualenv(env.PROJECT_VIRTUALENV_DIR):
-        with cd(env.PROJECT_DIR):
-            python.install_requirements(filename='requirements.txt')
+    with python.virtualenv(env.PROJECT_VIRTUALENV_DIR), cd(env.PROJECT_DIR):
+        python.install_requirements(filename='requirements.txt')
 
 
 def run_project_management_commands():
-    with python.virtualenv(env.PROJECT_VIRTUALENV_DIR):
-        with cd(env.PROJECT_DIR):
-            run('python manage.py migrate')
-            run('python manage.py collectstatic --no-input')
-            create_django_admin_superuser()
+    with python.virtualenv(env.PROJECT_VIRTUALENV_DIR), cd(env.PROJECT_DIR):
+        run('python manage.py migrate')
+        run('python manage.py collectstatic --no-input')
+        create_django_admin_superuser()
 
 
 def create_django_admin_superuser():
