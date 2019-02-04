@@ -170,7 +170,7 @@ def bootstrap():
 
     install_ubuntu_packages()
     install_uwsgi()
-
+    create_project_database()
     download_project_source_code()
     upload_project_env_variables()
     create_project_virtualenv()
