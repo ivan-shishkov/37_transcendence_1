@@ -148,6 +148,7 @@ def upload_project_nginx_config():
 
 def update_nginx_configuration(config_path='/etc/nginx/sites-enabled/'):
     default_config_filepath = os.path.join(config_path, 'default')
+
     project_config_filepath = os.path.join(
         config_path, env.NGINX_CONFIG_FILENAME)
 
@@ -171,21 +172,13 @@ def bootstrap():
     install_uwsgi()
 
     download_project_source_code()
-
-    create_project_database()
-
     upload_project_env_variables()
-
     create_project_virtualenv()
     install_project_requirements()
     run_project_management_commands()
-
     create_project_configs_directory()
-
     upload_project_uwsgi_config()
-
     upload_uwsgi_service_config()
     update_uwsgi_service()
-
     upload_project_nginx_config()
     update_nginx_configuration()
