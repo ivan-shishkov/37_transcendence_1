@@ -184,3 +184,15 @@ def bootstrap():
     update_uwsgi_service()
     upload_project_nginx_config()
     update_nginx_configuration()
+
+
+@task
+def deploy():
+    set_env(env)
+
+    download_project_source_code()
+    install_project_requirements()
+    run_project_management_commands(is_bootstrap=False)
+    update_uwsgi_service()
+    upload_project_nginx_config()
+    update_nginx_configuration()
