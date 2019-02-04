@@ -77,11 +77,13 @@ def install_project_requirements():
         python.install_requirements(filename='requirements.txt')
 
 
-def run_project_management_commands():
+def run_project_management_commands(is_bootstrap=True):
     with python.virtualenv(env.PROJECT_VIRTUALENV_DIR), cd(env.PROJECT_DIR):
         run('python manage.py migrate')
         run('python manage.py collectstatic --no-input')
-        create_django_admin_superuser()
+
+        if is_bootstrap:
+            create_django_admin_superuser()
 
 
 def create_django_admin_superuser():
