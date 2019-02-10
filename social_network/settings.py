@@ -88,6 +88,8 @@ class BaseConfiguration(Configuration):
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+    AUTH_USER_MODEL = 'users.CustomUser'
+
 
 class Dev(BaseConfiguration):
     DEBUG = True
