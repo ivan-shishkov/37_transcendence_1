@@ -91,6 +91,12 @@ class BaseConfiguration(Configuration):
 
     AUTH_USER_MODEL = 'users.CustomUser'
 
+    LOGIN_REDIRECT_URL = 'pages:home'
+
+    LOGOUT_REDIRECT_URL = 'pages:home'
+
+    LOGIN_URL = 'users:login'
+
 
 class Dev(BaseConfiguration):
     DEBUG = True

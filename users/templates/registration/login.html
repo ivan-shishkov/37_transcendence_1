@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+</head>
+<body>
+  <h3><a href="{% url 'pages:home' %}">Transcendence</a></h3>
+  <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Log In</button>
+  </form>
+  <h3>No have account yet? Welcome to <a href="{% url 'users:signup' %}">Sign Up</a></h3>
+</body>
+</html>
