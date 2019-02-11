@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Transcendence</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Social Network{% endblock title %}
+
+{% block content %}
   <h1>Welcome to the Transcendence Social Network!</h1>
   <p>You can either <a href="{% url 'users:signup' %}">Sign Up</a>
       or <a href="{% url 'users:login' %}">Log In</a>.</p>
-</body>
-</html>
+{% endblock content %}
