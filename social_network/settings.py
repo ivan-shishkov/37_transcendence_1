@@ -19,6 +19,7 @@ class BaseConfiguration(Configuration):
         'django.contrib.staticfiles',
 
         'users.apps.UsersConfig',
+        'pages.apps.PagesConfig',
     ]
 
     MIDDLEWARE = [
