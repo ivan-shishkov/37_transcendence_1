@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Personal page{% endblock title %}
+{% block title %}{{ current_user }} - Social Network{% endblock title %}
 
 {% block content %}
-  <h1>Here will be personal page of {{ user_info.first_name }} {{ user_info.last_name }}</h1>
+  <h1>Here will be personal page of {{ current_user }}</h1>
+    {% if current_user == user %}
+      <h2><a href="{% url 'users:user_edit' current_user.pk %}">Edit profile</a></h2>
+    {% endif %}
 {% endblock content %}
