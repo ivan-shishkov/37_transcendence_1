@@ -9,7 +9,7 @@ from .forms import CustomUserCreationForm
 
 class UserInfoDetailView(LoginRequiredMixin, DetailView):
     model = CustomUser
-    template_name = 'users/user_info.html'
+    template_name = 'users/user_detail.html'
     context_object_name = 'current_user'
 
 

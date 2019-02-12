@@ -9,7 +9,7 @@ class HomePageView(TemplateView):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return HttpResponseRedirect(
-                reverse('users:user_info', args=[request.user.id]),
+                reverse('users:user_detail', args=[request.user.id]),
             )
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
