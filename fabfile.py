@@ -62,6 +62,7 @@ def upload_project_env_variables(config_filename='.env'):
             'db_host': 'localhost',
             'db_name': env.PROJECT_DATABASE_NAME,
             'remote_host': env.REMOTE_HOST,
+            'media_root': env.DJANGO_MEDIA_ROOT,
             'sentry_dsn': env.SENTRY_DSN,
         },
     )
@@ -144,6 +145,7 @@ def upload_project_nginx_config():
             'socket_filepath': env.SOCKET_FILEPATH,
             'server_name': env.REMOTE_HOST,
             'project_static_dir': os.path.join(env.PROJECT_DIR, 'static'),
+            'project_users_uploads_dir': env.DJANGO_MEDIA_ROOT,
         },
     )
 

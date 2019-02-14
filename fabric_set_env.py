@@ -10,6 +10,8 @@ def set_env(env):
     env.password = os.environ['REMOTE_HOST_PASSWORD']
     env.port = os.environ['REMOTE_HOST_SSH_PORT']
 
+    env.USER_HOME_DIR = user.home_directory(env.user)
+
     env.PROJECT_DATABASE_USER = os.environ['PROJECT_DATABASE_USER']
     env.PROJECT_DATABASE_PASSWORD = os.environ['PROJECT_DATABASE_PASSWORD']
     env.PROJECT_DATABASE_NAME = os.environ['PROJECT_DATABASE_NAME']
@@ -18,10 +20,9 @@ def set_env(env):
     env.DJANGO_SUPERUSER_USERNAME = os.environ['DJANGO_SUPERUSER_USERNAME']
     env.DJANGO_SUPERUSER_EMAIL = os.environ['DJANGO_SUPERUSER_EMAIL']
     env.DJANGO_SUPERUSER_PASSWORD = os.environ['DJANGO_SUPERUSER_PASSWORD']
+    env.DJANGO_MEDIA_ROOT = os.path.join(env.USER_HOME_DIR, 'media')
 
     env.SENTRY_DSN = os.environ['SENTRY_DSN']
-
-    env.USER_HOME_DIR = user.home_directory(env.user)
 
     env.PROJECT_DIR = os.path.join(env.USER_HOME_DIR, '37_transcendence_1')
     env.PROJECT_VIRTUALENV_DIR = os.path.join(env.PROJECT_DIR, 'venv')
