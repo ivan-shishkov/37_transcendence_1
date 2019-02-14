@@ -9,6 +9,8 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(
         'last name', max_length=150, help_text='Required')
     email = models.EmailField('email address', help_text='Required')
+    avatar = models.ImageField(
+        'user avatar', upload_to='avatars/', null=True, blank=True)
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)

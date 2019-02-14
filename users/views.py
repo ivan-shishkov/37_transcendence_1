@@ -16,7 +16,7 @@ class UserInfoDetailView(LoginRequiredMixin, DetailView):
 class UserInfoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = CustomUser
     template_name = 'users/user_edit.html'
-    fields = ('first_name', 'last_name',)
+    fields = ('avatar',)
 
     def test_func(self):
         return self.get_object() == self.request.user

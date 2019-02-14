@@ -89,6 +89,10 @@ class BaseConfiguration(Configuration):
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+    MEDIA_URL = '/media/'
+
+    MEDIA_ROOT = values.Value(environ_required=True)
+
     AUTH_USER_MODEL = 'users.CustomUser'
 
     LOGIN_REDIRECT_URL = 'pages:home'
