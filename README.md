@@ -9,6 +9,7 @@ An online version of the latest version of the project is available [here](http:
 * **DJANGO_SECRET_KEY** - a [secret key](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-SECRET_KEY)
 * **DJANGO_DATABASE_URI** - a database URI (The database must be either **SQLite** or **PostgreSQL**)
 * **DJANGO_ALLOWED_HOSTS** - a [list of strings](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-ALLOWED_HOSTS) representing the host/domain names that this Django site can serve (**only for production**)
+* **DJANGO_MEDIA_ROOT** - an [absolute filesystem path](https://docs.djangoproject.com/en/2.1/ref/settings/#media-root) to the directory that will hold user-uploaded files.
 * **SENTRY_DSN** - a [Sentry DSN](https://docs.sentry.io/error-reporting/configuration/?platform=python#dsn) for [Sentry](https://docs.sentry.io/) error tracking system (**only for production**)
 
 # Launch on localhost
@@ -28,6 +29,7 @@ and then set the necessary environment variables:
 $ export DJANGO_CONFIGURATION='Dev'
 $ export DJANGO_SECRET_KEY='your_secret_key'
 $ export DJANGO_DATABASE_URI='your_database_uri'
+$ export DJANGO_MEDIA_ROOT='/absolute/path/to/media/'
 
 ```
 
