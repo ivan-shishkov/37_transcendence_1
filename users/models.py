@@ -11,6 +11,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField('email address', help_text='Required')
     avatar = models.ImageField(
         'user avatar', upload_to='avatars/', null=True, blank=True)
+    description = models.TextField('about me', null=True, blank=True)
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)

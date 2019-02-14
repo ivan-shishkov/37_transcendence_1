@@ -8,6 +8,13 @@
       <img src="{{ current_user.avatar.url }}" alt="">
     {% endif %}
 
+    <h2>About me:</h2>
+    {% if current_user.description %}
+        <p>{{ current_user.description }}</p>
+    {% else %}
+        <p>No description.</p>
+    {% endif %}
+
     {% if current_user == user %}
       <h2><a href="{% url 'users:user_edit' current_user.pk %}">Edit profile</a></h2>
     {% endif %}
