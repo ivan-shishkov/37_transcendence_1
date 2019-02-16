@@ -24,7 +24,7 @@ class UserInfoDetailView(LoginRequiredMixin, DetailView):
 
         context['can_add_to_friends'] = (
                 current_user != user and
-                not user.friends.filter(id=current_user.id).count()
+                not user.friends.filter(id=current_user.id).exists()
         )
         return context
 
