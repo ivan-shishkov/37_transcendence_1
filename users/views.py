@@ -1,7 +1,9 @@
 from django.views.generic import DetailView, CreateView
 from django.views.generic.edit import UpdateView
+from django.views.generic.base import View
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import HttpResponseRedirect, reverse
 
 from .models import CustomUser
 from .forms import CustomUserCreationForm
@@ -12,6 +14,20 @@ class UserInfoDetailView(LoginRequiredMixin, DetailView):
     template_name = 'users/user_detail.html'
     context_object_name = 'current_user'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        current_user = self.get_object()
+        user = self.request.user
+
+        context['can_edit_profile'] = current_user == user
+
+        context['can_add_to_friends'] = (
+                current_user != user and
+                not user.friends.filter(id=current_user.id).count()
+        )
+        return context
+
 
 class UserInfoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = CustomUser
@@ -20,6 +36,21 @@ class UserInfoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return self.get_object() == self.request.user
+
+
+class AddToFriendsView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        friend_id = request.POST.get('friend_id', 0)
+
+        try:
+            friend = CustomUser.objects.get(id=friend_id)
+            request.user.friends.add(friend)
+        except CustomUser.DoesNotExist:
+            return HttpResponseRedirect(reverse('pages:home'))
+
+        return HttpResponseRedirect(
+            reverse('users:user_detail', args=[friend_id]),
+        )
 
 
 class SignUpView(CreateView):
