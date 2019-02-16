@@ -10,8 +10,8 @@ class CustomUser(AbstractUser):
         'last name', max_length=150, help_text='Required')
     email = models.EmailField('email address', help_text='Required')
     avatar = models.ImageField(
-        'user avatar', upload_to='avatars/', null=True, blank=True)
-    description = models.TextField('about me', null=True, blank=True)
+        'user avatar', upload_to='avatars/', blank=True, default='')
+    description = models.TextField('about me', blank=True, default='')
 
     friends = models.ManyToManyField('self', symmetrical=False)
 
