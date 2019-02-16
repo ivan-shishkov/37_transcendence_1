@@ -13,6 +13,8 @@ class CustomUser(AbstractUser):
         'user avatar', upload_to='avatars/', null=True, blank=True)
     description = models.TextField('about me', null=True, blank=True)
 
+    friends = models.ManyToManyField('self', symmetrical=False)
+
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
 
