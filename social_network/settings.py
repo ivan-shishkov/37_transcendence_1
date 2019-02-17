@@ -18,6 +18,8 @@ class BaseConfiguration(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
+        'crispy_forms',
+
         'users.apps.UsersConfig',
         'pages.apps.PagesConfig',
     ]
@@ -100,6 +102,8 @@ class BaseConfiguration(Configuration):
     LOGOUT_REDIRECT_URL = 'pages:home'
 
     LOGIN_URL = 'users:login'
+
+    CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 class Dev(BaseConfiguration):
