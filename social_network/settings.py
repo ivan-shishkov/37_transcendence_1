@@ -19,6 +19,7 @@ class BaseConfiguration(Configuration):
         'django.contrib.staticfiles',
 
         'crispy_forms',
+        'captcha',
 
         'users.apps.UsersConfig',
         'pages.apps.PagesConfig',
