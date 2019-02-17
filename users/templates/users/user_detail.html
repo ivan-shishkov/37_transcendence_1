@@ -1,29 +1,42 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}{{ current_user }} - Social Network{% endblock title %}
 
 {% block content %}
-  <h1>Here will be personal page of {{ current_user }}</h1>
-    {% if current_user.avatar %}
-      <img src="{{ current_user.avatar.url }}" alt="">
-    {% endif %}
+    <div class="row justify-content-center">
+      <div class="col-auto mt-4">
+        <div class="mb-4">
+          {% if current_user.avatar %}
+            <img src="{{ current_user.avatar.url }}" width="200" alt="user avatar">
+          {% else %}
+              <img src="{% static 'users/default_avatar.jpg' %}" width="200" alt="user avatar">
+          {% endif %}
+        </div>
+        <div class="text-center">
+            {% if can_edit_profile %}
+            <a class="btn btn-success" href="{% url 'users:user_edit' current_user.pk %}" role="button">Edit profile</a>
+          {% endif %}
 
-    <h2>About me:</h2>
-    {% if current_user.description %}
-        <p>{{ current_user.description }}</p>
-    {% else %}
-        <p>No description.</p>
-    {% endif %}
+          {% if can_add_to_friends %}
+            <form action="{% url 'users:add_to_friends' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="friend_id" value="{{ current_user.id }}">
+              <button class="btn btn-primary" type="submit">Add to friends</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6 mt-4">
+          <h1 class="text-center text-md-left">{{ current_user }}</h1>
 
-    {% if can_edit_profile %}
-      <h2><a href="{% url 'users:user_edit' current_user.pk %}">Edit profile</a></h2>
-    {% endif %}
-
-    {% if can_add_to_friends %}
-        <form action="{% url 'users:add_to_friends' %}" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="friend_id" value="{{ current_user.id }}">
-          <button type="submit">Add to friends</button>
-        </form>
-    {% endif %}
+          <h3 class="mt-4">About:</h3>
+            {% if current_user.description %}
+                <p>{{ current_user.description }}</p>
+            {% else %}
+                <p>No description.</p>
+            {% endif %}
+      </div>
+    </div>
 {% endblock content %}

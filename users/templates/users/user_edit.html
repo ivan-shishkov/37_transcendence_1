@@ -5,10 +5,16 @@
 {% block title %}Edit user profile{% endblock title %}
 
 {% block content %}
-  <h2>Edit user profile</h2>
-    <form action="" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form|crispy }}
-      <button type="submit">Update</button>
-    </form>
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+          <h2>Edit user profile</h2>
+      </div>
+      <div class="col-12">
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-success" type="submit">Update</button>
+          </form>
+      </div>
+    </div>
 {% endblock content %}
