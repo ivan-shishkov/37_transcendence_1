@@ -20,6 +20,7 @@ class BaseConfiguration(Configuration):
 
         'crispy_forms',
         'captcha',
+        'easy_thumbnails',
 
         'users.apps.UsersConfig',
         'pages.apps.PagesConfig',
