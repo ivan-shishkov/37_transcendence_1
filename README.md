@@ -57,9 +57,7 @@ $ python manage.py runserver
 
 ```
 
-After that you can log in to admin interface on [http://localhost:8000/admin/](http://localhost:8000/admin/) and create new users of social network.
-
-All created users will have personal pages available on **http://localhost:8000/users/<user_id>/** (e.g. http://localhost:8000/users/1/).
+After that you can visit either to main page on [http://localhost:8000/](http://localhost:8000/) or to admin interface on [http://localhost:8000/admin/](http://localhost:8000/admin/).
 
 # Deploy on Production Server
 
