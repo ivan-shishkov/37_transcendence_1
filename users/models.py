@@ -15,6 +15,9 @@ class CustomUser(AbstractUser):
 
     friends = models.ManyToManyField('self', symmetrical=False)
 
+    class Meta:
+        ordering = ('last_name', 'first_name',)
+
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
 
