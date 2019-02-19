@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, ListView
 from django.views.generic.edit import UpdateView
 from django.views.generic.base import View
 from django.urls import reverse_lazy
@@ -27,6 +27,12 @@ class UserInfoDetailView(LoginRequiredMixin, DetailView):
                 not user.friends.filter(id=current_user.id).exists()
         )
         return context
+
+
+class UserInfoListView(LoginRequiredMixin, ListView):
+    model = CustomUser
+    template_name = 'users/user_list.html'
+    paginate_by = 20
 
 
 class UserInfoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

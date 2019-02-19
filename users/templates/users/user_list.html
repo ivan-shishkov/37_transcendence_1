@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load thumbnail %}
+
+{% block title %}Social Network Users{% endblock title %}
+
+{% block content %}
+    <div class="row justify-content-center mb-4">
+      <div class="col-auto text-center">
+          <h2>Users of social network</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-10 col-sm-8 col-md-4">
+          {% for current_user in object_list %}
+              <div class="media mb-4">
+                  {% if current_user.avatar %}
+                    <img src="{% thumbnail current_user.avatar 75x75 crop %}" class="rounded mr-3" alt="user avatar">
+                  {% else %}
+                    <img src="{% static 'users/img/default_avatar_mini.jpg' %}" class="rounded mr-3" alt="user avatar">
+                  {% endif %}
+                  <div class="media-body">
+                  <h5 class="mt-2"><a href="{% url 'users:user_detail' current_user.pk %}">{{ current_user }}</a></h5>
+                </div>
+              </div>
+          {% endfor %}
+
+          {% if is_paginated %}
+            <nav>
+              <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="{% url 'users:user_list' %}?page=1">First</a></li>
+
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="{% url 'users:user_list' %}?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+                {% endif %}
+
+                <li class="page-item active"><a class="page-link" href="{% url 'users:user_list' %}?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="{% url 'users:user_list' %}?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+                {% endif %}
+
+                <li class="page-item"><a class="page-link" href="{% url 'users:user_list' %}?page=last">Last</a></li>
+              </ul>
+            </nav>
+          {% endif %}
+      </div>
+    </div>
+{% endblock content %}

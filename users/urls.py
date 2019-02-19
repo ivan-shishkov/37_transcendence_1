@@ -2,12 +2,14 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
 from .views import (
-    UserInfoDetailView, UserInfoUpdateView, SignUpView, AddToFriendsView,
+    UserInfoDetailView, UserInfoUpdateView, UserInfoListView,
+    SignUpView, AddToFriendsView,
 )
 
 app_name = 'users'
 
 urlpatterns = [
+    path('', UserInfoListView.as_view(), name='user_list'),
     path('<int:pk>/', UserInfoDetailView.as_view(), name='user_detail'),
     path('<int:pk>/edit/', UserInfoUpdateView.as_view(), name='user_edit'),
     path('add-to-friends/', AddToFriendsView.as_view(), name='add_to_friends'),
