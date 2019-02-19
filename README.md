@@ -3,6 +3,15 @@
 This project is a simplified version of a social network developed using the [Django](https://www.djangoproject.com/) web framework.
 An online version of the latest version of the project is available [here](http://83.220.170.27/).
 
+## Currently implemented
+
+* User registration
+* User authentication (Log in / Log out)
+* View of list of social network's users
+* User profile (with ability of edit)
+* Ability to add to friends
+* Custom filters in admin interface (by avatar's having and by friends count)
+
 # Used Environment Variables
 
 * **DJANGO_CONFIGURATION** - a configuration to run the project (can be either **Dev** (development) or **Prod** (production))
