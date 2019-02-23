@@ -3,6 +3,7 @@ Django==2.1.5
 django-bootstrap4==0.0.7
 django-configurations==2.1
 django-dotenv==1.4.2
+django-registration==3.0
 django-simple-captcha==0.5.10
 easy-thumbnails==2.6
 Pillow==5.4.1
