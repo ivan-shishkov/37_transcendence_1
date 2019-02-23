@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
+{% load bootstrap4 %}
 
 {% block title %}Sign Up{% endblock title %}
 
@@ -10,10 +10,12 @@
             <h2>Sign Up</h2>
         </div>
         <div class="col-12">
-            <form action="" method="post">
+            <form action="" method="post" class="form">
                 {% csrf_token %}
-                {{ form|crispy }}
-                <button class="btn btn-success" type="submit">Sign Up</button>
+                {% bootstrap_form form error_css_class='is-invalid'%}
+                {% buttons %}
+                    <button class="btn btn-success" type="submit">Sign Up</button>
+                {% endbuttons %}
             </form>
         </div>
     </div>

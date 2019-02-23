@@ -18,9 +18,9 @@ class BaseConfiguration(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
-        'crispy_forms',
         'captcha',
         'easy_thumbnails',
+        'bootstrap4',
 
         'users.apps.UsersConfig',
         'pages.apps.PagesConfig',
@@ -105,7 +105,9 @@ class BaseConfiguration(Configuration):
 
     LOGIN_URL = 'users:login'
 
-    CRISPY_TEMPLATE_PACK = 'bootstrap4'
+    BOOTSTRAP4 = {
+        'success_css_class': '',
+    }
 
 
 class Dev(BaseConfiguration):
