@@ -18,13 +18,14 @@
             </div>
             <div class="text-center">
                 {% if can_edit_profile %}
-                    <a class="btn btn-success" href="{% url 'users:user_edit' current_user.pk %}" role="button">Edit profile</a>
+                    <a class="btn btn-success" href="{% url 'users:user_edit' current_user.id %}" role="button">Edit profile</a>
                 {% endif %}
 
                 {% if can_add_to_friends %}
                     <form action="{% url 'users:add_to_friends' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="friend_id" value="{{ current_user.id }}">
+                        <input type="hidden" name="next" value="{% url 'users:user_detail' current_user.id %}">
                         <button class="btn btn-primary" type="submit">Add to friends</button>
                     </form>
                 {% endif %}

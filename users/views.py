@@ -3,7 +3,7 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.base import View
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import HttpResponseRedirect, reverse
+from django.shortcuts import redirect
 from django_registration.backends.one_step.views import RegistrationView
 
 from .models import CustomUser
@@ -47,17 +47,13 @@ class UserInfoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class AddToFriendsView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
-        friend_id = request.POST.get('friend_id', 0)
+        friend_id = request.POST.get('friend_id')
+        redirect_to = request.POST.get('next')
 
-        try:
-            friend = CustomUser.objects.get(id=friend_id)
-            request.user.friends.add(friend)
-        except CustomUser.DoesNotExist:
-            return HttpResponseRedirect(reverse('pages:home'))
+        friend = CustomUser.objects.get(id=friend_id)
+        request.user.friends.add(friend)
 
-        return HttpResponseRedirect(
-            reverse('users:user_detail', args=[friend_id]),
-        )
+        return redirect(redirect_to)
 
 
 class SignUpView(RegistrationView):
