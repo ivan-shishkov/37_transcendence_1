@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse
 
 
@@ -8,7 +8,7 @@ class HomePageView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return HttpResponseRedirect(
+            return redirect(
                 reverse('users:user_detail', args=[request.user.id]),
             )
         context = self.get_context_data(**kwargs)
