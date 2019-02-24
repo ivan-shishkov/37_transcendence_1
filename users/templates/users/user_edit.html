@@ -5,11 +5,11 @@
 {% block title %}Edit user profile{% endblock title %}
 
 {% block content %}
-    <div class="row mb-4">
+    <div class="row mb-4 justify-content-center">
         <div class="col-12 text-center">
             <h2>Edit user profile</h2>
         </div>
-        <div class="col-12">
+        <div class="col-11 col-sm-10 col-md-8">
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form error_css_class='is-invalid'%}
