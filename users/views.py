@@ -1,9 +1,10 @@
-from django.views.generic import DetailView, CreateView, ListView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import UpdateView
 from django.views.generic.base import View
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import HttpResponseRedirect, reverse
+from django_registration.backends.one_step.views import RegistrationView
 
 from .models import CustomUser
 from .forms import CustomUserCreationForm
@@ -59,7 +60,7 @@ class AddToFriendsView(LoginRequiredMixin, View):
         )
 
 
-class SignUpView(CreateView):
+class SignUpView(RegistrationView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('users:login')
+    success_url = reverse_lazy('pages:home')
     template_name = 'users/signup.html'

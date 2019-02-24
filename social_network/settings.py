@@ -21,6 +21,7 @@ class BaseConfiguration(Configuration):
         'captcha',
         'easy_thumbnails',
         'bootstrap4',
+        'django_registration',
 
         'users.apps.UsersConfig',
         'pages.apps.PagesConfig',
