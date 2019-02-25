@@ -34,12 +34,14 @@
         <div class="col-md-6 col-lg-5 mt-4">
             <h1 class="text-center text-md-left">{{ current_user }}</h1>
 
-            <h3 class="mt-4">About:</h3>
-            {% if current_user.description %}
-                <p>{{ current_user.description }}</p>
-            {% else %}
-                <p>No description.</p>
-            {% endif %}
+            <div class="mt-4 mx-2 mx-sm-4 mx-md-0">
+                <h3>About:</h3>
+                {% if current_user.description %}
+                    <p>{{ current_user.description }}</p>
+                {% else %}
+                    <p>No description.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock content %}
