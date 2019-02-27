@@ -21,12 +21,12 @@ class UserInfoDetailView(LoginRequiredMixin, DetailView):
         current_user = self.get_object()
         user = self.request.user
 
-        context['can_edit_profile'] = current_user == user
+        is_friend = user.friends.filter(id=current_user.id).exists()
 
-        context['can_add_to_friends'] = (
-                current_user != user and
-                not user.friends.filter(id=current_user.id).exists()
-        )
+        context['can_edit_profile'] = current_user == user
+        context['can_add_to_friends'] = current_user != user and not is_friend
+        context['is_already_friend'] = current_user != user and is_friend
+
         return context
 
 

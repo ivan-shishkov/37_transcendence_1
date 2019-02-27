@@ -29,6 +29,10 @@
                         <button class="btn btn-primary" type="submit">Add to friends</button>
                     </form>
                 {% endif %}
+
+                {% if is_already_friend %}
+                    <h5 class="text-secondary">Added to friends</h5>
+                {% endif %}
             </div>
         </div>
         <div class="col-md-6 col-lg-5 mt-4">
